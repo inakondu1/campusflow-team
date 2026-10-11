@@ -1,8 +1,11 @@
 """Engineer A feature tests. AI-authored; no individual contribution claimed."""
 
 from copy import deepcopy
+from pathlib import Path
+from tempfile import TemporaryDirectory
 import unittest
 
+from campusflow.storage import load_tickets, save_tickets
 from engineer_a.tickets import (
     calculate_priority, create_ticket, find_ticket, list_tickets, validate_records,
 )
@@ -83,6 +86,25 @@ class TicketTests(unittest.TestCase):
         self.tickets[0]["id"] = "T1000"
         self.tickets.reverse()
         self.assertEqual(create_ticket(self.tickets, "Third", "Other", "low", 1)["id"], "T1001")
+
+    def test_failed_creation_after_reload_preserves_next_id_and_records(self):
+        create_ticket(self.tickets, "Existing", "Other", "low", 1)
+        self.tickets[0]["id"] = "T999"
+        with TemporaryDirectory() as directory:
+            path = Path(directory) / "tickets.json"
+            save_tickets(self.tickets, path)
+            loaded = load_tickets(path)
+            before = deepcopy(loaded)
+            with self.assertRaisesRegex(ValueError, "Title"):
+                create_ticket(loaded, " ", "Other", "low", 1)
+            self.assertEqual(loaded, before)
+
+            created = create_ticket(loaded, "After reload", "Other", "low", 1)
+            self.assertEqual(created["id"], "T1000")
+            self.assertEqual(loaded[0], before[0])
+            self.assertEqual(len({ticket["id"] for ticket in loaded}), 2)
+            save_tickets(loaded, path)
+            self.assertEqual(load_tickets(path), loaded)
 
     def test_lookup_normalizes_id_and_returns_copy(self):
         create_ticket(self.tickets, "Issue", "Other", "low", 1)

@@ -59,15 +59,20 @@ def calculate_priority(urgency, affected_users):
     return "low"
 
 
+def _next_ticket_id(tickets):
+    """Calculate an unused ID without changing records or allocating state."""
+    next_number = max((ticket_number(ticket["id"]) for ticket in tickets), default=0) + 1
+    return f"T{next_number:03d}"
+
+
 def create_ticket(tickets, title, category, urgency, affected_users):
     """Append only after validation succeeds, returning an independent copy."""
     title = nonblank(title, "Title")
     category = normalize_choice(category, CATEGORIES, "Category")
     urgency = normalize_choice(urgency, URGENCIES, "Urgency")
     priority = calculate_priority(urgency, affected_users)
-    next_number = max((ticket_number(ticket["id"]) for ticket in tickets), default=0) + 1
     ticket = {
-        "id": f"T{next_number:03d}",
+        "id": _next_ticket_id(tickets),
         "title": title,
         "category": category,
         "urgency": urgency,
