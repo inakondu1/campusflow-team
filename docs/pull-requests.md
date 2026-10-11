@@ -4,8 +4,10 @@ Repository: https://github.com/mordecai12-cool/campusflow2
 
 Integration branch: `feat/engineer-b-integration-and-checks`, authored under
 Michael's account with explicit AI-assistance attribution. Original Mordecai
-commits are preserved. A pull request will link this branch to main; its URL
-will be recorded below after creation.
+commits are preserved. Publication is currently blocked: GitHub returned 403, Resource not accessible
+by integration, when creating this branch. The connected integration lists only
+miikese's installation. No remote branch or PR has been created by this session.
+The prepared title and body are in [pr-draft.md](pr-draft.md).
 
 ## Create a pull request yourself
 
@@ -41,3 +43,33 @@ git push -u origin feat/your-change
 Partner approval and cross-review are pending. Do not paste invented findings
 or approvals. Record each person's actual PR, meaningful changes, tests and
 learning evidence. An AI-generated commit is not proof of independent work.
+
+## Publish the finished local commits
+
+On the computer containing this checkout, authenticate Git to GitHub using
+your own account, then run:
+
+```sh
+cd /home/student/campusflow2
+git switch feat/engineer-b-integration-and-checks
+python3 -m unittest discover -s tests -v
+git push -u origin feat/engineer-b-integration-and-checks
+```
+
+The shell checkout is separate from the original /home/student/campus project.
+If using the portable Git bundle on another computer, clone campusflow2 first,
+then fetch the feature branch from the bundle file:
+
+```sh
+git clone https://github.com/mordecai12-cool/campusflow2.git
+cd campusflow2
+git fetch /path/to/campusflow2-commits.bundle feat/engineer-b-integration-and-checks:feat/engineer-b-integration-and-checks
+git switch feat/engineer-b-integration-and-checks
+python3 -m unittest discover -s tests -v
+git push -u origin feat/engineer-b-integration-and-checks
+```
+
+Replace /path/to with the actual download location. Once pushed, open the
+comparison link above, click Create pull request, and use pr-draft.md.
+The repository owner can alternatively enable the connected GitHub integration
+for this repository and let the assistant complete publication and PR creation.
