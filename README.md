@@ -131,6 +131,8 @@ campusflow2/
 
 The CLI owns one list and passes it to both feature groups. Workflow modifies
 records in that collection; storage validates and persists the same list.
+The integration changes are proposed in [PR #2](https://github.com/mordecai12-cool/campusflow2/pull/2),
+authored by miikese. Teammate review and merge remain pending.
 See [function contracts](docs/design-decisions.md),
 [Engineer A guide](docs/engineer-a.md), [Engineer B guide](docs/engineer-b.md),
 [testing guide](docs/testing-guide.md) and [PR instructions](docs/pull-requests.md).

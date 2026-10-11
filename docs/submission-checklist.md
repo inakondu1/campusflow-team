@@ -12,7 +12,9 @@ full rubric has not been supplied; this tracks the requirements shared so far.
 - [x] Unit tests avoid interactive input and isolate file writes.
 - [x] Local regression suite and demo pass; evidence is checked in.
 - [x] CI and pull request template are provided.
-- [x] Mordecai's existing four commits are preserved.
+- [x] Mordecai's original commits and subsequent main update are preserved.
+- [x] Michael's AI-assisted integration branch is pushed under miikese.
+- [x] [PR #2](https://github.com/mordecai12-cool/campusflow2/pull/2) is open for genuine partner review.
 - [ ] Both partners confirm the role map and record actual design agreement.
 - [ ] Michael provides personally authored application code and matching tests.
 - [ ] Both partners identify their actual contributions and AI assistance accurately.

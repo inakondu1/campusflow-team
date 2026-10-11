@@ -4,10 +4,10 @@ Repository: https://github.com/mordecai12-cool/campusflow2
 
 Integration branch: `feat/engineer-b-integration-and-checks`, authored under
 Michael's account with explicit AI-assistance attribution. Original Mordecai
-commits are preserved. Publication is currently blocked: GitHub returned 403, Resource not accessible
-by integration, when creating this branch. The connected integration lists only
-miikese's installation. No remote branch or PR has been created by this session.
-The prepared title and body are in [pr-draft.md](pr-draft.md).
+commits are preserved. The branch is published and [PR #2](https://github.com/mordecai12-cool/campusflow2/pull/2)
+is open into main, authored by miikese. The latest main was integrated before
+publication. Partner review and merge remain pending.
+The PR title and body are also recorded in [pr-draft.md](pr-draft.md).
 
 ## Create a pull request yourself
 
@@ -56,6 +56,7 @@ python3 -m unittest discover -s tests -v
 git push -u origin feat/engineer-b-integration-and-checks
 ```
 
+This branch has already been pushed using Michael's authenticated GitHub CLI.
 The shell checkout is separate from the original /home/student/campus project.
 If using the portable Git bundle on another computer, clone campusflow2 first,
 then fetch the feature branch from the bundle file:
@@ -71,5 +72,6 @@ git push -u origin feat/engineer-b-integration-and-checks
 
 Replace /path/to with the actual download location. Once pushed, open the
 comparison link above, click Create pull request, and use pr-draft.md.
-The repository owner can alternatively enable the connected GitHub integration
-for this repository and let the assistant complete publication and PR creation.
+The connected plugin initially returned 403 when creating a branch. Michael
+completed GitHub CLI sign-in under his own account, and the assistant then
+published the branch and created PR #2. No login to the owner's account was used.
