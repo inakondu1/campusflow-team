@@ -102,3 +102,20 @@ the assistant adapted the stronger report input-protection test to this repo
 and preserved its native function contracts. Source commit: daf51ad581bb8fe3e76d3107a38c0f1bdc8288e3.
 The assistant reran all 66 tests, seven contract probes, syntax checks and the
 demo successfully. This is assistant verification, not a personal experiment.
+
+## Actual source merge — assistant execution record
+
+Michael's actual prompts: "so merge my own with mordecai project" and
+"not just pr but my work for campus". The assistant merged PR #2 after
+successful checks at his explicit request; no partner approval was recorded.
+It tested merged main 7fa245cf13e8567557f3dbd9e5cdec8aa9b38b18: all 66
+tests, syntax checks and the demo passed.
+
+It then copied the actual engineer folders, matching tests, CLI, persistence
+and demo from /home/student/campus. Compatibility wrappers retain Mordecai's
+original function interfaces while using those same ownership implementations.
+An existing CLI test caught different resolved-reassignment wording; the
+assistant preserved the established message without weakening the assertion.
+All 95 combined tests and seven contract probes passed. Actual source/destination
+hashes and adaptations are recorded in campus-source-manifest.json.
+These are assistant actions; no independent fellow experiment is claimed.

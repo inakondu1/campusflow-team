@@ -4,10 +4,10 @@ import argparse
 from pathlib import Path
 import re
 
-from campusflow.reports import generate_report, get_queue
+from engineer_b.reports import generate_report
 from campusflow.storage import StorageError, load_tickets, save_tickets
-from campusflow.tickets import _find_record, create_ticket, find_ticket, list_tickets
-from campusflow.workflow import assign_ticket, reopen_ticket, update_status
+from engineer_a.tickets import create_ticket, find_ticket, list_tickets
+from engineer_b.workflow import assign_ticket, reopen_ticket, update_status, work_queue
 
 
 DEFAULT_DATA = Path(__file__).resolve().parent / "data" / "tickets.json"
@@ -86,7 +86,7 @@ def run_menu(data_path):
                 category = input("Category (Network/Hardware/Software/Other): ")
                 urgency = input("Urgency (low/medium/high): ")
                 affected_users = ask_count()
-                ticket = create_ticket(title, category, urgency, affected_users, tickets)
+                ticket = create_ticket(tickets, title, category, urgency, affected_users)
                 dirty = True
                 print(f"Created {ticket['id']} with {ticket['priority']} priority.")
             elif choice == "2":
@@ -102,15 +102,15 @@ def run_menu(data_path):
             elif choice == "5":
                 ticket_id = input("Ticket ID: ")
                 new_status = input("New status (in_progress/resolved): ")
-                ticket = update_status(_find_record(tickets, ticket_id), new_status)
+                ticket = update_status(tickets, ticket_id, new_status)
                 dirty = True
                 print(f"Ticket {ticket['id']} is now {ticket['status']}.")
             elif choice == "6":
-                ticket = reopen_ticket(_find_record(tickets, input("Resolved ticket ID: ")))
+                ticket = reopen_ticket(tickets, input("Resolved ticket ID: "))
                 dirty = True
                 print(f"Reopened {ticket['id']}; status is open.")
             elif choice == "7":
-                display_collection(get_queue(tickets), "No open tickets in the work queue.")
+                display_collection(work_queue(tickets), "No open tickets in the work queue.")
             elif choice == "8":
                 display_report(tickets)
             elif choice == "9":
