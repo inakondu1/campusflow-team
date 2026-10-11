@@ -1,5 +1,11 @@
+"""Original ticket tests plus AI-assisted validation regression coverage."""
+from copy import deepcopy
 import unittest
-from campusflow.tickets import calculate_priority, validate_title, create_ticket, assign_ticket
+
+from campusflow.tickets import (
+    assign_ticket, calculate_priority, create_ticket, find_ticket,
+    list_tickets, validate_records, validate_title,
+)
 
 
 class TestTickets(unittest.TestCase):
@@ -35,10 +41,6 @@ class TestTickets(unittest.TestCase):
             assign_ticket(tickets, "T999", "John")
 
 
-"""Engineer A feature tests. AI-authored; no individual contribution claimed."""
-from copy import deepcopy
-import unittest
-from campusflow.tickets import calculate_priority, create_ticket, find_ticket, list_tickets, validate_records
 
 class PriorityTests(unittest.TestCase):
 

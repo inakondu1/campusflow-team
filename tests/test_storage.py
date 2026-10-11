@@ -1,7 +1,16 @@
-import unittest
-import tempfile
+"""Original persistence tests plus AI-assisted safety regression coverage."""
+from copy import deepcopy
+import json
 import os
-from campusflow.storage import save_tickets, load_tickets
+from pathlib import Path
+from tempfile import TemporaryDirectory
+import tempfile
+import unittest
+from unittest.mock import patch
+
+from campusflow.storage import StorageError, load_tickets, save_tickets
+from campusflow.tickets import _find_record, create_ticket
+from campusflow.workflow import assign_ticket, update_status
 
 
 class TestStorage(unittest.TestCase):
@@ -42,16 +51,6 @@ class TestStorage(unittest.TestCase):
         os.remove(filename)
 
 
-"""Shared persistence tests using temporary storage. AI-authored."""
-from copy import deepcopy
-import json
-from pathlib import Path
-from tempfile import TemporaryDirectory
-import unittest
-from unittest.mock import patch
-from campusflow.storage import StorageError, load_tickets, save_tickets
-from campusflow.tickets import _find_record, create_ticket
-from campusflow.workflow import assign_ticket, update_status
 
 class StorageTests(unittest.TestCase):
 

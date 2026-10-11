@@ -36,6 +36,17 @@ class CliTests(unittest.TestCase):
         self.assertIn("Goodbye", result.stdout)
         self.assertFalse(self.path.exists())
 
+    def test_clone_launcher_runs_from_another_directory(self):
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "run.py"), "--data", str(self.path)],
+            input="0\n", capture_output=True, text=True,
+            cwd=self.directory.name, timeout=10, check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertIn("CAMPUSFLOW", result.stdout)
+        self.assertIn("Goodbye", result.stdout)
+        self.assertFalse(self.path.exists())
+
     def test_invalid_choices_loop_until_exit(self):
         result = self.run_menu("hello\n10\n-1\n\n0\n")
         self.assertEqual(result.returncode, 0, result.stderr)

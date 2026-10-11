@@ -31,3 +31,23 @@ AI suggested a workflow approach that allowed an unassigned ticket to move to `i
 ## AI Correction and Verification
 
 Michael Emmanuel Ikese reviewed an AI suggestion that allowed an unassigned ticket to move to `in_progress`. The suggestion was rejected because the project requirements state that a ticket must be assigned first. The correct rule was implemented and verified with a unit test.
+
+## Integration session — assistant execution record
+
+Michael requested: "so can you make a commit for me and add anything that
+needs from me and make it to meet all the standard the assesment wants?"
+He also requested code updates, a clone launcher and a pull request.
+
+The assistant inspected this repository and reproduced resolved reassignment,
+backward transitions, duplicate IDs after gaps, Boolean count acceptance and
+non-array JSON acceptance. It generated fixes and regression tests, reusing
+previously tested CampusFlow validation/storage/CLI code where appropriate.
+The assistant ran unittest, syntax checks and the demo. See test-output.txt
+and the implementation PR for actual evidence. These executions were performed
+by the assistant, not claimed as Michael's independent experiments.
+
+The earlier personal entries above are preserved as supplied by the repository.
+Their prompts and independent results were not verified during this session.
+Both fellows should expand their own entries with actual prompts, predictions,
+commands they personally ran, observed results and accepted/changed/rejected
+advice. No personal learning or teammate review is invented here.
