@@ -1,74 +1,148 @@
-from campusflow.tickets import create_ticket, assign_ticket
-from campusflow.workflow import update_status
-from campusflow.reports import get_queue, generate_report
-from campusflow.storage import save_tickets, load_tickets
+"""CampusFlow command-line helpdesk using only the Python standard library."""
 
-tickets = load_tickets("tickets.json")
+import argparse
+from pathlib import Path
+import re
 
-while True:
-    print("\nCampusFlow")
-    print("1. Create ticket")
-    print("2. List tickets")
-    print("3. Assign ticket")
-    print("4. Update status")
-    print("5. Queue")
-    print("6. Reports")
-    print("0. Exit")
+from campusflow.reports import generate_report, get_queue
+from campusflow.storage import StorageError, load_tickets, save_tickets
+from campusflow.tickets import _find_record, create_ticket, find_ticket, list_tickets
+from campusflow.workflow import assign_ticket, reopen_ticket, update_status
 
-    choice = input("Choose an option: ")
-    if choice == "0":
-        save_tickets(tickets, "tickets.json")
-        break
-    if choice == "1":
-        title = input("Enter ticket title: ")
-        category = input("Enter category: ")
-        urgency = input("Enter urgency: ")
-        affected_users = input("Enter number of affected users: ")
 
+DEFAULT_DATA = Path(__file__).resolve().parent / "data" / "tickets.json"
+MENU = """
+==================================
+           CAMPUSFLOW
+    Campus Helpdesk Management
+==================================
+1. Create Ticket
+2. List All Tickets
+3. View Ticket Details
+4. Assign Ticket
+5. Update Ticket Status
+6. Reopen Resolved Ticket
+7. View Work Queue
+8. Generate Reports
+9. Save Tickets
+0. Exit
+"""
+
+
+def display_ticket(ticket):
+    print(f"\nTicket {ticket['id']}")
+    for field, value in ticket.items():
+        print(f"  {field}: {value if value is not None else 'None (unassigned)'}")
+
+
+def display_collection(tickets, empty_message="No tickets found."):
+    if not tickets:
+        print(empty_message)
+    for ticket in tickets:
+        staff = ticket["assigned_to"] or "unassigned"
+        print(f"{ticket['id']} | {ticket['priority']} | {ticket['status']} | {ticket['title']} | {staff}")
+
+
+def display_report(tickets):
+    report = generate_report(tickets)
+    print(f"Total tickets: {report['total']}")
+    for group in ("by_status", "by_priority"):
+        for label, count in report[group].items():
+            print(f"  {label}: {count}")
+
+
+def ask_count():
+    raw = input("Affected users (positive integer): ").strip()
+    if not re.fullmatch(r"[0-9]+", raw):
+        raise ValueError("Affected users must be a positive integer; text and decimals are not allowed.")
+    return int(raw)
+
+
+def run_menu(data_path):
+    try:
+        tickets = load_tickets(data_path)
+    except StorageError as error:
+        print(f"Error: {error}")
+        print("Startup stopped to protect your data. Restore a valid backup or choose another --data path.")
+        return 1
+    print(f"Loaded {len(tickets)} ticket(s). Storage: {data_path}")
+    dirty = False
+
+    def save_changes():
+        save_tickets(tickets, data_path)
+        print(f"Saved {len(tickets)} ticket(s) to {data_path}.")
+
+    while True:
+        print(MENU)
         try:
-            affected_users = int(affected_users)
-        except ValueError:
-            print("Invalid number of affected users")
-            continue
-
-        result = create_ticket(title, category, urgency, affected_users, tickets)
-        print(result)
-
-    if choice == "2":
-        if not tickets:
-            print("No tickets found")
-        else:
-            for ticket in tickets:
-                print(ticket)
-
-    if choice == "3":
-        ticket_id = input("Enter ticket ID: ")
-        staff_name = input("Enter staff name: ")
-
-        result = assign_ticket(tickets, ticket_id, staff_name)
-        print(result)
-
-    if choice == "4":
-        ticket_id = input("Enter ticket ID: ")
-        new_status = input("Enter new status: ")
-
-        for ticket in tickets:
-            if ticket["id"] == ticket_id:
-                result = update_status(ticket, new_status)
-                print(result)
-                break
+            choice = input("Enter choice: ").strip()
+            if choice == "0":
+                if dirty:
+                    save_changes()
+                print("Goodbye.")
+                return 0
+            if choice == "1":
+                title = input("Title: ")
+                category = input("Category (Network/Hardware/Software/Other): ")
+                urgency = input("Urgency (low/medium/high): ")
+                affected_users = ask_count()
+                ticket = create_ticket(title, category, urgency, affected_users, tickets)
+                dirty = True
+                print(f"Created {ticket['id']} with {ticket['priority']} priority.")
+            elif choice == "2":
+                display_collection(list_tickets(tickets))
+            elif choice == "3":
+                display_ticket(find_ticket(tickets, input("Ticket ID: ")))
+            elif choice == "4":
+                ticket_id = input("Ticket ID: ")
+                staff_name = input("Staff name: ")
+                ticket = assign_ticket(tickets, ticket_id, staff_name)
+                dirty = True
+                print(f"Assigned {ticket['id']} to {ticket['assigned_to']}.")
+            elif choice == "5":
+                ticket_id = input("Ticket ID: ")
+                new_status = input("New status (in_progress/resolved): ")
+                ticket = update_status(_find_record(tickets, ticket_id), new_status)
+                dirty = True
+                print(f"Ticket {ticket['id']} is now {ticket['status']}.")
+            elif choice == "6":
+                ticket = reopen_ticket(_find_record(tickets, input("Resolved ticket ID: ")))
+                dirty = True
+                print(f"Reopened {ticket['id']}; status is open.")
+            elif choice == "7":
+                display_collection(get_queue(tickets), "No open tickets in the work queue.")
+            elif choice == "8":
+                display_report(tickets)
+            elif choice == "9":
+                save_changes()
+                dirty = False
             else:
-                print("Ticket not found")
+                print("Invalid choice. Enter a number from 0 to 9.")
+        except (EOFError, KeyboardInterrupt):
+            print("\nInput ended.")
+            if dirty:
+                try:
+                    save_changes()
+                except StorageError as error:
+                    print(f"Error: {error} Unsaved changes could not be stored.")
+                    return 1
+            print("Goodbye.")
+            return 0
+        except ValueError as error:
+            print(f"Error: {error}")
+            # Failed saves keep dirty=True and the menu available for retry.
 
-    if choice == "5":
-        queue = get_queue(tickets)
 
-        if not queue:
-            print("No tickets in queue")
-        else:
-            for ticket in queue:
-                print(ticket)
+def main(argv=None):
+    parser = argparse.ArgumentParser(description="CampusFlow campus helpdesk")
+    parser.add_argument("--data", type=Path, default=DEFAULT_DATA, help="JSON storage file")
+    parser.add_argument("--demo", action="store_true", help="Run a repeatable demo in temporary storage")
+    args = parser.parse_args(argv)
+    if args.demo:
+        from campusflow.demo import run_demo
+        return run_demo()
+    return run_menu(args.data)
 
-    if choice == "6":
-        report = generate_report(tickets)
-        print(report)
+
+if __name__ == "__main__":
+    raise SystemExit(main())
