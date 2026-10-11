@@ -6,6 +6,7 @@ Repository: https://github.com/mordecai12-cool/campusflow2
 | --- | --- | --- | --- |
 | [#1 Complete CampusFlow helpdesk system](https://github.com/mordecai12-cool/campusflow2/pull/1) | mordecai12-cool | Merged into main by miikese; no recorded reviews | The diff deletes five cache files. Application and tests were already on main; this is not a reviewed feature contribution. |
 | [#2 Fix ticket lifecycle, validation and persistence; add clone launcher and tests](https://github.com/mordecai12-cool/campusflow2/pull/2) | miikese | Merged at Michael's explicit request after passing checks; no recorded partner approval | AI-assisted application and tests; publication does not establish genuine peer review. |
+| [#8 Combine actual campus source with shared CampusFlow app](https://github.com/mordecai12-cool/campusflow2/pull/8) | miikese | Actual source-folder integration and 95-test evidence published | AI-assisted transfer/adaptation at Michael's explicit merge request; no independent human review is claimed. |
 
 The PR list was verified directly: repository search omitted PR #1 even though
 it exists. Historical approval cannot be supplied after a merge and described

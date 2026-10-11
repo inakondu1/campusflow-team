@@ -4,6 +4,7 @@ Michael asked to combine the work in /home/student/campus with Mordecai's
 project. The actual working-tree files, including the local ownership-folder
 reorganization and one-pass report refactor, are now copied into this repo.
 The original local workspace and Mordecai's repository history are preserved.
+Publication PR: https://github.com/mordecai12-cool/campusflow2/pull/8.
 
 | Local campus source | Combined application |
 | --- | --- |

@@ -13,12 +13,6 @@ python3 run.py
 ```
 
 On Windows use `py -3 run.py`. `python3 main.py` is also supported.
-If these changes are still in a pull request, check out its branch first:
-
-```sh
-git switch feat/engineer-b-integration-and-checks
-python3 run.py
-```
 
 Run the demonstration without writing permanent ticket data:
 
@@ -148,6 +142,8 @@ The original integration [PR #2](https://github.com/mordecai12-cool/campusflow2/
 authored by miikese, was merged at Michael's explicit request after successful
 checks. No partner approval was recorded; this publication does not complete
 the guide's review requirement.
+The actual campus source folders and shared API integration are recorded in
+[PR #8](https://github.com/mordecai12-cool/campusflow2/pull/8).
 Mordecai authored [PR #1](https://github.com/mordecai12-cool/campusflow2/pull/1),
 which is already merged. Its diff removes tracked Python cache files; the
 application and tests were already on main. No reviews were recorded before

@@ -7,6 +7,7 @@ individual learning evidence remain outstanding for assessment completion.
 Repository main: https://github.com/mordecai12-cool/campusflow2/tree/main
 Engineer A's existing PR: https://github.com/mordecai12-cool/campusflow2/pull/1
 Engineer B's integration PR: https://github.com/mordecai12-cool/campusflow2/pull/2
+Actual campus source integration: https://github.com/mordecai12-cool/campusflow2/pull/8
 
 ## Verification snapshots
 
@@ -22,7 +23,8 @@ The assistant actually ran these commands. Evidence: [main test output](main-tes
 Syntax checks also passed. See [source mapping](source-integration.md),
 [copied-file hashes](campus-source-manifest.json) and
 [combined-source test evidence](source-integration-test-output.txt).
-The source-integration PR discussion records the final published main SHA
+The [source-integration PR discussion](https://github.com/mordecai12-cool/campusflow2/pull/8)
+records the final published main SHA
 and actual post-merge output; GitHub Actions also verifies published main.
 
 ## Guide requirements and remaining actions
