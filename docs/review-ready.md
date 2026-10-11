@@ -2,6 +2,7 @@
 
 This is an AI-assisted refactor proposed under the requirement to review
 before merge. It is not a record of a completed human review or personal learning.
+PR: https://github.com/mordecai12-cool/campusflow2/pull/9.
 
 ## Code to review
 

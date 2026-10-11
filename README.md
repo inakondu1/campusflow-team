@@ -175,5 +175,6 @@ before your teammate supplies it.
 The follow-up refactor isolates ID calculation and transition validation,
 with tests for failed creation after reload and a second lifecycle after
 reopening. It is AI-assisted work proposed for genuine partner review.
+Proposal: [PR #9](https://github.com/mordecai12-cool/campusflow2/pull/9).
 See [review and merge checklist](docs/review-ready.md) and
 [contribution provenance](docs/contribution-provenance.md).

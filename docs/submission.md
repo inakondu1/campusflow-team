@@ -8,6 +8,7 @@ Repository main: https://github.com/mordecai12-cool/campusflow2/tree/main
 Engineer A's existing PR: https://github.com/mordecai12-cool/campusflow2/pull/1
 Engineer B's integration PR: https://github.com/mordecai12-cool/campusflow2/pull/2
 Actual campus source integration: https://github.com/mordecai12-cool/campusflow2/pull/8
+Follow-up refactor awaiting review: https://github.com/mordecai12-cool/campusflow2/pull/9
 
 ## Verification snapshots
 
