@@ -25,6 +25,29 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(update_status(self.tickets, "T001", "IN_PROGRESS")["status"], "in_progress")
         self.assertEqual(update_status(self.tickets, "T001", " resolved ")["status"], "resolved")
 
+    def test_reopened_ticket_completes_second_lifecycle_with_assignment(self):
+        assign_ticket(self.tickets, "T001", "Staff")
+        update_status(self.tickets, "T001", "in_progress")
+        update_status(self.tickets, "T001", "resolved")
+        reopened = reopen_ticket(self.tickets, "T001")
+        self.assertEqual(reopened["assigned_to"], "Staff")
+        before = deepcopy(self.tickets)
+        for status in ("resolved", "open"):
+            with self.subTest(status=status), self.assertRaises(ValueError):
+                update_status(self.tickets, "T001", status)
+            self.assertEqual(self.tickets, before)
+
+        update_status(self.tickets, "T001", "in_progress")
+        resolved = update_status(self.tickets, "T001", "resolved")
+        self.assertEqual(resolved["assigned_to"], "Staff")
+        self.assertEqual(resolved["status"], "resolved")
+        self.assertEqual(work_queue(self.tickets), [])
+        self.assertEqual(generate_report(self.tickets), {
+            "total": 1,
+            "by_status": {"open": 0, "in_progress": 0, "resolved": 1},
+            "by_priority": {"critical": 0, "high": 0, "medium": 0, "low": 1},
+        })
+
     def test_invalid_transitions_preserve_state(self):
         assign_ticket(self.tickets, "T001", "Staff")
         for status in ("open", "resolved", "closed", None):

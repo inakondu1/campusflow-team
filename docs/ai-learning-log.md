@@ -119,3 +119,20 @@ assistant preserved the established message without weakening the assertion.
 All 95 combined tests and seven contract probes passed. Actual source/destination
 hashes and adaptations are recorded in campus-source-manifest.json.
 These are assistant actions; no independent fellow experiment is claimed.
+
+## Follow-up refactor — assistant execution record
+
+Actual user prompt: "do it then and merge then push using all the requirement",
+followed by "yes add it". The assistant implemented the two example refactors
+from the handoff guide: separate ticket ID allocation and lifecycle validation.
+It added regression scenarios for failed creation after reloading a high ID
+and a second complete lifecycle after reopening. Both scenarios passed against
+the previous implementation before refactoring; all 97 tests passed afterward.
+Seven independent contract probes, syntax checks and the demo also passed.
+Source: af1f19a2071d566c2e29eacb9d885101f9b506f5; see refactor-test-output.txt.
+
+These code changes and test executions were completed by the assistant. They
+are not attributed to either fellow as independent implementation, learning
+or partner review. The PR requires Mordecai's actual review and approval before
+merge under the latest instruction to meet all the guide requirements.
+Individual prompts/experiments and real agreement remain pending.

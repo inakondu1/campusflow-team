@@ -26,9 +26,11 @@ Run automated tests:
 python3 -m unittest discover -s . -t . -v
 ```
 
-95 tests cover both projects' APIs, creation, validation, assignment, lifecycle, numeric queue
+97 tests cover both projects' APIs, creation, validation, assignment, lifecycle, numeric queue
 ordering, reports, persistence, safe-save failures and real CLI flows.
-See [test evidence](docs/test-output.txt) and [demo evidence](docs/demo-output.txt).
+See [current refactor test evidence](docs/refactor-test-output.txt) and
+[demo evidence](docs/refactor-demo-output.txt). Historical source-integration
+results remain in docs/source-integration-test-output.txt.
 GitHub Actions checks tests, syntax and the demo on Python 3.10 and 3.12.
 
 ## Menu
@@ -169,3 +171,10 @@ and technical defence. Two PR URLs alone do not establish those requirements.
 Track outstanding evidence in [the checklist](docs/submission-checklist.md)
 and [learning log](docs/ai-learning-log.md). Do not claim review or approval
 before your teammate supplies it.
+
+The follow-up refactor isolates ID calculation and transition validation,
+with tests for failed creation after reload and a second lifecycle after
+reopening. It is AI-assisted work proposed for genuine partner review.
+Proposal: [PR #9](https://github.com/mordecai12-cool/campusflow2/pull/9).
+See [review and merge checklist](docs/review-ready.md) and
+[contribution provenance](docs/contribution-provenance.md).

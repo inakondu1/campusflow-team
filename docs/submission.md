@@ -8,6 +8,7 @@ Repository main: https://github.com/mordecai12-cool/campusflow2/tree/main
 Engineer A's existing PR: https://github.com/mordecai12-cool/campusflow2/pull/1
 Engineer B's integration PR: https://github.com/mordecai12-cool/campusflow2/pull/2
 Actual campus source integration: https://github.com/mordecai12-cool/campusflow2/pull/8
+Follow-up refactor awaiting review: https://github.com/mordecai12-cool/campusflow2/pull/9
 
 ## Verification snapshots
 
@@ -16,6 +17,7 @@ Actual campus source integration: https://github.com/mordecai12-cool/campusflow2
 | Baseline main: 3f068e38d4bf478033415c79b22e18ea11275093 | 15 passed | 2 passed, 5 failed | Historical baseline before PR #2 |
 | PR #2 source: daf51ad581bb8fe3e76d3107a38c0f1bdc8288e3 | 66 passed | 7 passed | Merged as 7fa245cf13e8567557f3dbd9e5cdec8aa9b38b18; merged main also tested successfully |
 | Actual campus source integration | 95 passed | 7 passed | Includes actual engineer folders, compatible original API and mixed-API persistence test |
+| Proposed ID/lifecycle refactor: af1f19a2071d566c2e29eacb9d885101f9b506f5 | 97 passed | 7 passed | PR proposal; requires actual partner approval before merge |
 
 The assistant actually ran these commands. Evidence: [main test output](main-test-output.txt),
 [branch test output](test-output.txt), [main contract checks](main-contract-checks.txt),
@@ -26,6 +28,11 @@ Syntax checks also passed. See [source mapping](source-integration.md),
 The [source-integration PR discussion](https://github.com/mordecai12-cool/campusflow2/pull/8)
 records the final published main SHA
 and actual post-merge output; GitHub Actions also verifies published main.
+Current refactor evidence is in [refactor-test-output.txt](refactor-test-output.txt).
+The published main SHA remains 28ad65a106e8e90bbd666f426ab05aff8271e524
+until a new approved merge. See [review-ready.md](review-ready.md) for the
+remaining human steps and [contribution-provenance.md](contribution-provenance.md)
+for the actual source history.
 
 ## Guide requirements and remaining actions
 

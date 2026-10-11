@@ -17,9 +17,8 @@ def assign_ticket(tickets, ticket_id, staff_name):
     return ticket.copy()
 
 
-def update_status(tickets, ticket_id, new_status):
-    new_status = normalize_choice(new_status, STATUSES, "Status")
-    ticket = _find_record(tickets, ticket_id)
+def _validate_transition(ticket, new_status):
+    """Check a normalized target status before the stored record is changed."""
     current = ticket["status"]
     if current == "resolved":
         raise ValueError("Resolved tickets cannot be modified. Use the explicit reopen command.")
@@ -28,6 +27,12 @@ def update_status(tickets, ticket_id, new_status):
         raise ValueError(f"Invalid transition: {current} → {new_status}. Follow open → in_progress → resolved.")
     if new_status == "in_progress" and ticket["assigned_to"] is None:
         raise ValueError("Assign the ticket to a staff member before starting work.")
+
+
+def update_status(tickets, ticket_id, new_status):
+    new_status = normalize_choice(new_status, STATUSES, "Status")
+    ticket = _find_record(tickets, ticket_id)
+    _validate_transition(ticket, new_status)
     ticket["status"] = new_status
     return ticket.copy()
 

@@ -8,7 +8,9 @@ python3 -m compileall -q main.py run.py campusflow engineer_a engineer_b tests
 python3 run.py --demo
 ```
 
-Expected: 95 tests and OK; the demo ends with Demo assertions passed.
+Expected on the refactor branch: 97 tests and OK; the demo ends with Demo assertions passed.
+Published main remains at 95 tests until the reviewed refactor is merged.
+See [actual refactor results](refactor-test-output.txt).
 Tests and demo use temporary storage and do not overwrite saved tickets.
 The full command includes both engineer folders and the existing shared suite.
 PR #2 has been merged at Michael's request; its merged main passed 66 tests.

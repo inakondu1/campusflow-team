@@ -101,5 +101,7 @@
       "destination_sha256": "5d696da02e2417633f2abc0b53fd57e068d5895dd54776eab92d84f037563559",
       "adapted": false
     }
-  ]
+  ],
+  "snapshot_commit": "afa2afd97fe3cf14550683ecde9bd5f1058e12ee",
+  "hash_scope": "Import-time source and destination files. Subsequent refactors are tracked in Git; these historical hashes are not current-file checksums."
 }

@@ -24,6 +24,8 @@ and remaining blockers are recorded in [submission.md](submission.md).
 - [x] PR #2 merged main 7fa245cf13e8567557f3dbd9e5cdec8aa9b38b18 tested: all 66 tests, syntax checks and demo pass.
 - [x] Actual campus engineer folders, matching tests, CLI, persistence and demo integrated; original API preserved.
 - [x] All 95 combined tests and seven independent contract probes pass on the source-integration implementation.
+- [x] Proposed ID/lifecycle refactors and two meaningful regression scenarios implemented; all 97 branch tests pass.
+- [x] Contribution provenance and exact partner review instructions prepared without claiming personal authorship or approval.
 - [ ] Both partners confirm the role map and record actual design agreement.
 - [ ] Michael provides personally authored application code and matching tests.
 - [ ] Both partners identify their actual contributions and AI assistance accurately.
