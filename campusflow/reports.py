@@ -14,6 +14,7 @@ def get_queue(tickets):
 
 
 def generate_report(tickets):
+    """Count valid records once, preserving their order and returning fresh counts."""
     status_counts = dict.fromkeys(STATUSES, 0)
     priority_counts = dict.fromkeys(PRIORITIES, 0)
     for ticket in tickets:

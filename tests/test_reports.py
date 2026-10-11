@@ -57,8 +57,30 @@ class TestQueueAndReports(unittest.TestCase):
 
     def test_report_does_not_mutate_tickets(self):
         tickets = []
-        create_ticket("Issue", "Other", "medium", 1, tickets)
+        cases = (
+            ("low", 1, "open"),
+            ("high", 10, "open"),
+            ("low", 2, "in_progress"),
+            ("high", 12, "resolved"),
+            ("high", 2, "in_progress"),
+            ("low", 1, "open"),
+        )
+        for index, (urgency, count, status) in enumerate(cases, start=1):
+            ticket = create_ticket(f"Issue {index}", "Other", urgency, count, tickets)
+            if status != "open":
+                assign_ticket(tickets, ticket["id"], "Staff")
+                update_status(tickets[-1], "in_progress")
+                if status == "resolved":
+                    update_status(tickets[-1], "resolved")
+        tickets.reverse()
         before = deepcopy(tickets)
         report = generate_report(tickets)
-        report["by_priority"]["medium"] = 999
+        expected_report = deepcopy(report)
+        self.assertEqual(tickets, before)
+
+        report["total"] = 999
+        report["by_status"]["open"] = 999
+        report["by_priority"]["critical"] = 999
+        self.assertEqual(tickets, before)
+        self.assertEqual(generate_report(tickets), expected_report)
         self.assertEqual(tickets, before)
