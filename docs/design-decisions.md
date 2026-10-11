@@ -99,3 +99,15 @@ The guide requires discussion before implementing features. A later review
 can document current agreement, but must not be backdated as an earlier
 discussion. The assistant asked for the fellows' actual decisions in chat;
 no response has been received at the time of this update.
+
+## Combining the actual campus source with this repository
+
+The engineer_a and engineer_b folders are copied from Michael's local campus
+working tree with matching tests. main.py directly imports those modules;
+storage uses Engineer A's validation. The older campusflow public API is
+retained through adapters: creation keeps the list-last signature and
+record-based status/reopen calls wrap the supplied record in a one-item list.
+Both APIs therefore operate on the same dictionary records without duplicate
+business implementations. Reports and queue use Engineer B's functions.
+The mixed-API integration test verifies lifecycle, reports and JSON reload.
+See source-integration.md for provenance and copied-file hashes.
