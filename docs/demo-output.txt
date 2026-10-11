@@ -1,4 +1,7 @@
 Command: python3 run.py --demo
+Source commit: daf51ad581bb8fe3e76d3107a38c0f1bdc8288e3
+Executor: AI assistant
+Exit status: 0
 
 CampusFlow demonstration — temporary data, no changes to your saved tickets
 Created T001: high + 12 → critical

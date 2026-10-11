@@ -10,6 +10,20 @@ python3 run.py --demo
 
 Expected: 66 tests and OK; the demo ends with Demo assertions passed.
 Tests and demo use temporary storage and do not overwrite saved tickets.
+These results currently apply to PR #2's integration branch. Current main
+passes 15 existing tests but fails five additional requirement probes. See
+[main test output](main-test-output.txt), [main contract checks](main-contract-checks.txt)
+and [integration contract checks](integration-contract-checks.txt).
+
+Run the additional probes against a checkout without editing its records:
+
+```sh
+python3 docs/review_probes.py "$PWD"
+```
+
+After approved changes merge, fetch latest main into a clean checkout and run
+the whole suite again. Record its exact SHA and actual output. Branch results
+must not be presented as results from final main.
 
 Run each responsibility separately:
 

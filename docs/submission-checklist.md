@@ -1,7 +1,9 @@
 # Assessment evidence checklist
 
-Checked items reflect technical implementation and repository evidence. The
-full rubric has not been supplied; this tracks the requirements shared so far.
+Checked items reflect technical implementation and repository evidence on the
+integration branch, unless explicitly marked main. The complete Fellows'
+Engineering Guide supplied by Michael has now been checked. Submission links
+and remaining blockers are recorded in [submission.md](submission.md).
 
 - [x] Real application modules and automated tests exist for both feature groups.
 - [x] Creation, validation, priority and unique IDs are implemented.
@@ -15,15 +17,22 @@ full rubric has not been supplied; this tracks the requirements shared so far.
 - [x] Mordecai's original commits and subsequent main update are preserved.
 - [x] Michael's AI-assisted integration branch is pushed under miikese.
 - [x] [PR #2](https://github.com/mordecai12-cool/campusflow2/pull/2) is open for genuine partner review.
+- [x] Mordecai's [PR #1](https://github.com/mordecai12-cool/campusflow2/pull/1) exists and is merged; its diff only removes cache files.
+- [x] Current main commit 3f068e38d4bf478033415c79b22e18ea11275093 tested: 15 unittest tests pass.
+- [x] Extra contract probes run on main and integration: main fails five requirements; integration passes all seven probes.
+- [x] Two concrete assistant review observations per PR are prepared with reproducible evidence.
 - [ ] Both partners confirm the role map and record actual design agreement.
 - [ ] Michael provides personally authored application code and matching tests.
 - [ ] Both partners identify their actual contributions and AI assistance accurately.
 - [ ] A genuine teammate review and approval are recorded on the integration PR.
 - [ ] Both partners review each other's work and record substantive findings.
+- [ ] Each fellow authors a meaningful application-and-test PR; the cache-only PR #1 does not establish this.
+- [ ] Each PR receives two genuine partner observations and final approval before merge.
 - [ ] Learning logs include actual prompts, independent experiments and results.
 - [ ] Both partners complete the technical defence and demonstration.
-- [ ] Check any remaining assessment sections against the complete rubric.
+- [x] Check all assessment sections against the supplied complete rubric.
 - [ ] Reviewed changes merge to main with required checks passing.
+- [ ] Run and retain the full test result from the final approved main commit after merge.
 
 An AI-assisted commit under an account does not establish independent human
 implementation. No teammate review, personal experiment, approval or defence

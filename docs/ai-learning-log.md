@@ -1,5 +1,10 @@
 # AI Learning Log
 
+Verification status: the original individual entries below are preserved from
+the repository. This session has not verified their original prompts,
+predictions or personally executed experiments. They must be expanded by
+their authors before being claimed as completed assessment evidence.
+
 ## Mordecai Otit Marvellous
 
 ### Interaction 1
@@ -51,3 +56,49 @@ Their prompts and independent results were not verified during this session.
 Both fellows should expand their own entries with actual prompts, predictions,
 commands they personally ran, observed results and accepted/changed/rejected
 advice. No personal learning or teammate review is invented here.
+
+## Submission preparation — assistant execution record
+
+Actual user prompt: "but make sure both pr is there and add evidence and do aall this"
+followed by the requirements for substantive reviews, approved merges, final
+main tests, truthful learning logs, design agreements and contribution attribution.
+
+The assistant inspected both PRs directly. PR #1 belongs to mordecai12-cool,
+is merged and only deletes five cache files. PR #2 belongs to miikese and is
+open. Neither had a recorded review when inspected. The assistant ran the
+15-test suite on main SHA 3f068e38d4bf478033415c79b22e18ea11275093 and the
+66-test suite on integration source SHA 3abd77c47288208208f24c4415a58058ec8bdb17.
+It also ran seven independent contract probes: main passed two and failed
+five; integration passed all seven. Output is recorded in the evidence files.
+
+Critical correction by the assistant: the earlier claim that only one PR
+existed was based on incomplete search results. Direct repository history
+and PR retrieval established that PR #1 exists. This is an assistant correction,
+not an independently completed learning experiment by either fellow.
+
+## Individual evidence still needed
+
+Each fellow must complete three entries with their own actual records. For
+each entry supply: problem; initial understanding; verbatim actual prompt;
+useful AI guidance; predicted outcome; independent command/experiment;
+observed result or official verification source; accepted/improved/rejected
+advice and why; related file/test/commit; explanation in their own words.
+
+| Fellow | Entry | Current gap |
+| --- | --- | --- |
+| Mordecai | 1: priority rules | Original prompt, independent experiment/output and personal explanation pending verification. |
+| Mordecai | 2: unittest | Original prompt, independent experiment/output and personal explanation pending verification. |
+| Mordecai | 3: invalid inputs | Original prompt and output pending; at least one of the three entries must show a real independently verified correction, improvement or rejection. |
+| Michael | 1: workflow | Original prompt, independent experiment/output and personal explanation pending verification. |
+| Michael | 2: persistence | Original prompt, independent experiment/output and personal explanation pending verification. |
+| Michael | 3: unassigned transition | The claimed rejected suggestion needs its actual prompt/suggestion and the test Michael personally ran; the assistant's test runs do not establish that experiment. |
+
+Original individual claims are not replaced with invented prompts or results.
+The assistant has requested the actual evidence in chat. No completed personal
+experiments or prior design agreement are asserted by this update.
+
+After Michael asked to add missing requirements from the reference project,
+the assistant adapted the stronger report input-protection test to this repo
+and preserved its native function contracts. Source commit: daf51ad581bb8fe3e76d3107a38c0f1bdc8288e3.
+The assistant reran all 66 tests, seven contract probes, syntax checks and the
+demo successfully. This is assistant verification, not a personal experiment.

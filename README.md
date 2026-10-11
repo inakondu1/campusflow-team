@@ -133,6 +133,11 @@ The CLI owns one list and passes it to both feature groups. Workflow modifies
 records in that collection; storage validates and persists the same list.
 The integration changes are proposed in [PR #2](https://github.com/mordecai12-cool/campusflow2/pull/2),
 authored by miikese. Teammate review and merge remain pending.
+Mordecai authored [PR #1](https://github.com/mordecai12-cool/campusflow2/pull/1),
+which is already merged. Its diff removes tracked Python cache files; the
+application and tests were already on main. No reviews were recorded before
+that merge. See [submission links and evidence](docs/submission.md) for the
+verified state of both PRs, current main and the integration branch.
 See [function contracts](docs/design-decisions.md),
 [Engineer A guide](docs/engineer-a.md), [Engineer B guide](docs/engineer-b.md),
 [testing guide](docs/testing-guide.md) and [PR instructions](docs/pull-requests.md).
@@ -146,9 +151,10 @@ Commits under Michael's account are not evidence of independent human authorship
 Existing learning-log entries belong to their authors and are not verified here.
 
 The technical work addresses the requirements shared in this conversation.
-Full assessment compliance still requires both people's actual code-and-test
+The full Fellows' Engineering Guide has now been supplied and checked.
+Assessment compliance still requires both people's actual code-and-test
 contributions, genuine contract agreement, cross-review, learning experiments
-and technical defence. The full assessment rubric has not been provided.
+and technical defence. Two PR URLs alone do not establish those requirements.
 Track outstanding evidence in [the checklist](docs/submission-checklist.md)
 and [learning log](docs/ai-learning-log.md). Do not claim review or approval
 before your teammate supplies it.

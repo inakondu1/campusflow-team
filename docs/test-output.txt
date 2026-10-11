@@ -1,5 +1,10 @@
 Command: python3 -m unittest discover -s tests -v
-Snapshot: AI-assisted integration branch working tree, before final documentation commit; partner review pending.
+Branch: feat/engineer-b-integration-and-checks
+Source commit: daf51ad581bb8fe3e76d3107a38c0f1bdc8288e3
+Python: 3.12.3
+Executor: AI assistant at Michael's request
+Exit status: 0
+This is branch evidence; final reviewed main must be tested after merge.
 
 test_clone_launcher_runs_from_another_directory (test_cli.CliTests.test_clone_launcher_runs_from_another_directory) ... ok
 test_corrupted_startup_stops_without_overwriting (test_cli.CliTests.test_corrupted_startup_stops_without_overwriting) ... ok
@@ -69,6 +74,6 @@ test_resolved_ticket_rejects_reassignment_and_status_updates (test_workflow.Test
 test_unassigned_cannot_start (test_workflow.TestWorkflow.test_unassigned_cannot_start) ... ok
 
 ----------------------------------------------------------------------
-Ran 66 tests in 2.659s
+Ran 66 tests in 2.216s
 
 OK

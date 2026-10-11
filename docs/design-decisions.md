@@ -89,3 +89,13 @@ there is no locking or reconciliation of concurrent valid writes.
 Each partner should add their own approval or requested changes here, with
 actual date, account and commit/PR reference. No signatures, peer approvals
 or prior discussions are invented by the assistant.
+
+| Fellow | Agreement status | Evidence to supply |
+| --- | --- | --- |
+| Mordecai / mordecai12-cool | Pending | Review all five contracts above; record accepted decisions or concrete changes, actual date and PR/commit reference. |
+| Michael / miikese | Pending | Review all five contracts above; record accepted decisions or concrete changes, actual date and PR/commit reference. |
+
+The guide requires discussion before implementing features. A later review
+can document current agreement, but must not be backdated as an earlier
+discussion. The assistant asked for the fellows' actual decisions in chat;
+no response has been received at the time of this update.

@@ -1,0 +1,14 @@
+Source commit: 3f068e38d4bf478033415c79b22e18ea11275093
+Executor: AI assistant
+Command: python3 /home/student/campusflow2/docs/review_probes.py /home/student/campusflow2-main-verification
+Exit status: 1
+These are extra contract probes, separate from unittest totals.
+
+FAIL: resolved reassignment rejects without mutation
+FAIL: backward transition rejects without mutation
+FAIL: IDs after gaps remain unique
+FAIL: Boolean count rejected without mutation
+FAIL: non-array JSON rejected without overwriting
+PASS: queue uses numeric ID ordering
+PASS: empty report includes all zero counts
+2/7 contract probes passed

@@ -2,6 +2,18 @@
 
 Repository: https://github.com/mordecai12-cool/campusflow2
 
+| PR | Author | Verified state | Evidence limitation |
+| --- | --- | --- | --- |
+| [#1 Complete CampusFlow helpdesk system](https://github.com/mordecai12-cool/campusflow2/pull/1) | mordecai12-cool | Merged into main by miikese; no recorded reviews | The diff deletes five cache files. Application and tests were already on main; this is not a reviewed feature contribution. |
+| [#2 Fix ticket lifecycle, validation and persistence; add clone launcher and tests](https://github.com/mordecai12-cool/campusflow2/pull/2) | miikese | Open; no recorded partner approval | AI-assisted application and tests; personal authorship and Mordecai's review remain to be evidenced. |
+
+The PR list was verified directly: repository search omitted PR #1 even though
+it exists. Historical approval cannot be supplied after a merge and described
+as pre-merge approval. A further genuine feature-and-test PR from Mordecai is
+needed to establish the guide's reviewed contribution requirement.
+See [assistant review findings](review-findings.md) and
+[submission state](submission.md). Assistant findings are not human reviews.
+
 Integration branch: `feat/engineer-b-integration-and-checks`, authored under
 Michael's account with explicit AI-assistance attribution. Original Mordecai
 commits are preserved. The branch is published and [PR #2](https://github.com/mordecai12-cool/campusflow2/pull/2)
