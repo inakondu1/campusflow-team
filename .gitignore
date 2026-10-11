@@ -1,4 +1,7 @@
 __pycache__/
-*.pyc
+*.py[cod]
 .venv/
+.env
 tickets.json
+data/*.json
+data/*.tmp

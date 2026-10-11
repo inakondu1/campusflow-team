@@ -1,0 +1,28 @@
+Command: python3 -m unittest discover -s tests -v
+Source: clean detached origin/main checkout
+Commit: 3f068e38d4bf478033415c79b22e18ea11275093
+Python: 3.12.3
+Executor: AI assistant at Michael's request
+Exit status: 0
+This is current main evidence, not evidence for the unmerged integration branch.
+
+test_invalid_json_raises_error (test_storage.TestStorage.test_invalid_json_raises_error) ... ok
+test_missing_file_returns_empty_list (test_storage.TestStorage.test_missing_file_returns_empty_list) ... ok
+test_save_and_load (test_storage.TestStorage.test_save_and_load) ... ok
+test_assign_unknown_ticket (test_tickets.TestTickets.test_assign_unknown_ticket) ... ok
+test_blank_title (test_tickets.TestTickets.test_blank_title) ... ok
+test_critical_priority (test_tickets.TestTickets.test_critical_priority) ... ok
+test_high_priority (test_tickets.TestTickets.test_high_priority) ... ok
+test_low_priority (test_tickets.TestTickets.test_low_priority) ... ok
+test_medium_priority (test_tickets.TestTickets.test_medium_priority) ... ok
+test_valid_title (test_tickets.TestTickets.test_valid_title) ... ok
+test_zero_affected_users (test_tickets.TestTickets.test_zero_affected_users) ... ok
+test_assigned_can_start (test_workflow.TestWorkflow.test_assigned_can_start) ... ok
+test_can_resolve_in_progress_ticket (test_workflow.TestWorkflow.test_can_resolve_in_progress_ticket) ... ok
+test_cannot_resolve_open_ticket (test_workflow.TestWorkflow.test_cannot_resolve_open_ticket) ... ok
+test_unassigned_cannot_start (test_workflow.TestWorkflow.test_unassigned_cannot_start) ... ok
+
+----------------------------------------------------------------------
+Ran 15 tests in 0.005s
+
+OK
