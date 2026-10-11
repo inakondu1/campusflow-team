@@ -111,3 +111,17 @@ Both APIs therefore operate on the same dictionary records without duplicate
 business implementations. Reports and queue use Engineer B's functions.
 The mixed-API integration test verifies lifecycle, reports and JSON reload.
 See source-integration.md for provenance and copied-file hashes.
+
+## Proposed refactor for partner review
+
+Ticket creation delegates ID calculation to _next_ticket_id after title,
+category, urgency and affected-user validation. It still appends only after
+all checks pass. The helper reads the highest stored numeric ID and holds no
+allocation state, so failed creation after reload does not consume an ID.
+
+Workflow normalizes the target and finds the stored ticket, then delegates
+all lifecycle and assignment prerequisites to _validate_transition before
+mutating status. Reopening remains a separate explicit operation. Both public
+interfaces retain their existing behavior. The two new regression scenarios
+passed before the refactor, and all 97 tests passed after it.
+These are implemented choices for review, not a signed human agreement.

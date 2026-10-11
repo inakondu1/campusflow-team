@@ -39,3 +39,8 @@ the direct source-folder integration follows on an issue-linked branch.
 Assistant-authored code and tests remain disclosed as such. Actual partner
 review, independently written contributions and personal learning evidence
 are still outstanding under the guide. Publication is not peer approval.
+
+The copied-file manifest describes the import snapshot; later changes are
+tracked by Git. The proposed follow-up refactor adds two regression tests,
+bringing its branch suite to 97, and changes the canonical helpers while
+preserving both APIs. See refactor-test-output.txt and review-ready.md.
