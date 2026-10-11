@@ -1,37 +1,26 @@
+"""Open work queue and counts across all tickets."""
+
+from .tickets import PRIORITIES, ticket_number
+from .workflow import STATUSES
+
+
 def get_queue(tickets):
-    priority_order = {
-        "critical": 1,
-        "high": 2,
-        "medium": 3,
-        "low": 4
-    }
+    ranks = {priority: rank for rank, priority in enumerate(PRIORITIES)}
+    ordered = sorted(
+        (ticket for ticket in tickets if ticket["status"] == "open"),
+        key=lambda ticket: (ranks[ticket["priority"]], ticket_number(ticket["id"])),
+    )
+    return [ticket.copy() for ticket in ordered]
 
-    queue = [ticket for ticket in tickets if ticket["status"] == "open"]
-
-    queue.sort(key=lambda ticket: (priority_order[ticket["priority"]], int(ticket["id"][1:])))
-    return queue
 
 def generate_report(tickets):
-    total = len(tickets)
-
-    status_counts = {
-        "open": 0,
-        "in_progress": 0,
-        "resolved": 0
-    }
-
-    priority_counts = {
-        "critical": 0,
-        "high": 0,
-        "medium": 0,
-        "low": 0
-    }
-
+    status_counts = dict.fromkeys(STATUSES, 0)
+    priority_counts = dict.fromkeys(PRIORITIES, 0)
     for ticket in tickets:
         status_counts[ticket["status"]] += 1
         priority_counts[ticket["priority"]] += 1
     return {
-        "total": total,
+        "total": len(tickets),
         "by_status": status_counts,
-        "by_priority": priority_counts
+        "by_priority": priority_counts,
     }

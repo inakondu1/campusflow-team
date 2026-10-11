@@ -29,8 +29,8 @@ class TestTickets(unittest.TestCase):
 
     def test_assign_unknown_ticket(self):
         tickets = []
-        result = assign_ticket(tickets, "T999", "John")
-        self.assertEqual(result, "ticket not found")
+        with self.assertRaisesRegex(ValueError, "Unknown ticket ID"):
+            assign_ticket(tickets, "T999", "John")
 
 
 if __name__ == "__main__":

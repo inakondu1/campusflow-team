@@ -1,4 +1,18 @@
-tickets = []
+import re
+
+PRIORITIES = ("critical", "high", "medium", "low")
+
+
+def ticket_number(ticket_id):
+    if not isinstance(ticket_id, str):
+        raise ValueError("Ticket ID must look like T001.")
+    text = ticket_id.strip().upper()
+    if not re.fullmatch(r"T[0-9]{3,}", text):
+        raise ValueError("Ticket ID must look like T001.")
+    number = int(text[1:])
+    if number < 1 or text != f"T{number:03d}":
+        raise ValueError("Ticket ID must be positive and consistently padded.")
+    return number
 
 def calculate_priority(urgency, affected_users):
     if urgency == "high" and affected_users >= 10:
@@ -55,10 +69,6 @@ def create_ticket(title, category, urgency, affected_users, tickets):
     return ticket
 
 def assign_ticket(tickets, ticket_id, staff_name):
-    for ticket in tickets:
-        if ticket["id"] == ticket_id:
-            if staff_name.strip() == "":
-                return"invalid staff name"
-            ticket["assigned_to"] = staff_name
-            return ticket
-    return "ticket not found"
+    """Compatibility entry point; assignment is owned by workflow."""
+    from .workflow import assign_ticket as workflow_assign_ticket
+    return workflow_assign_ticket(tickets, ticket_id, staff_name)
