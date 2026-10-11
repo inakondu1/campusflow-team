@@ -40,3 +40,35 @@ while True:
         else:
             for ticket in tickets:
                 print(ticket)
+
+    if choice == "3":
+        ticket_id = input("Enter ticket ID: ")
+        staff_name = input("Enter staff name: ")
+
+        result = assign_ticket(tickets, ticket_id, staff_name)
+        print(result)
+
+    if choice == "4":
+        ticket_id = input("Enter ticket ID: ")
+        new_status = input("Enter new status: ")
+
+        for ticket in tickets:
+            if ticket["id"] == ticket_id:
+                result = update_status(ticket, new_status)
+                print(result)
+                break
+            else:
+                print("Ticket not found")
+
+    if choice == "5":
+        queue = get_queue(tickets)
+
+        if not queue:
+            print("No tickets in queue")
+        else:
+            for ticket in queue:
+                print(ticket)
+
+    if choice == "6":
+        report = generate_report(tickets)
+        print(report)

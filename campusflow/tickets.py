@@ -9,10 +9,6 @@ def calculate_priority(urgency, affected_users):
         return "medium"
     else:
         return "low"
-print(calculate_priority("high", 12))
-print(calculate_priority("high", 2))
-print(calculate_priority("low", 4))
-print(calculate_priority("low", 1))
 
 def validate_title(title):
     if title.strip() == "":
@@ -24,10 +20,19 @@ def create_ticket(title, category, urgency, affected_users, tickets):
     if title.strip() == "":
         return "invalid title"
 
-    allowed_categories = ["Network", "Hardware", "Software", "Other"]
+    category_map = {
+        "network": "Network",
+        "hardware": "Hardware",
+        "software": "Software",
+        "other": "Other"
+    }
 
-    if category not in allowed_categories:
+    category_key = category.strip().lower()
+
+    if category_key not in category_map:
         return "invalid category"
+
+    category = category_map[category_key]
 
     urgency = urgency.lower()
     if urgency not in ["low", "medium", "high"]:
@@ -49,8 +54,6 @@ def create_ticket(title, category, urgency, affected_users, tickets):
     tickets.append(ticket)
     return ticket
 
-print(create_ticket("Campus Wi-Fi is down", "Network", "high", 12, tickets))
-
 def assign_ticket(tickets, ticket_id, staff_name):
     for ticket in tickets:
         if ticket["id"] == ticket_id:
@@ -59,4 +62,3 @@ def assign_ticket(tickets, ticket_id, staff_name):
             ticket["assigned_to"] = staff_name
             return ticket
     return "ticket not found"
-print(assign_ticket(tickets, "T001", "Marvellous"))

@@ -16,11 +16,3 @@ def update_status(ticket, new_status):
     ticket["status"] = new_status
     return ticket
 
-ticket = {
-        "id": "T001",
-        "status": "open",
-        "assigned_to": "Marvellous"
-    }
-print(update_status(ticket, "in_progress"))
-print(update_status(ticket, "resolved"))
-print(update_status(ticket, "open"))
