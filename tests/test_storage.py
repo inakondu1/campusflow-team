@@ -9,7 +9,7 @@ import unittest
 from unittest.mock import patch
 
 from campusflow.storage import StorageError, load_tickets, save_tickets
-from campusflow.tickets import _find_record, create_ticket
+from campusflow.tickets import _find_record, create_ticket, add_note
 from campusflow.workflow import assign_ticket, update_status
 
 
@@ -169,3 +169,18 @@ class StorageTests(unittest.TestCase):
             load_tickets(self.path)
         with self.assertRaises(StorageError):
             save_tickets(self.tickets, self.path)
+
+    def test_save_load_preserves_notes_and_next_note_id(self):
+        add_note(self.tickets, 'T001', 'Ina', 'First note')
+
+        save_tickets(self.tickets, self.path)
+
+        loaded = load_tickets(self.path)
+
+        self.assertEqual(loaded[0]['notes'][0]['note_id'], 'N001')
+        self.assertEqual(loaded[0]['notes'][0]['author'], 'Ina')
+        self.assertEqual(loaded[0]['notes'][0]['message'], 'First note')
+
+        add_note(loaded, 'T001', 'Marvellous', 'Second note')
+
+        self.assertEqual(loaded[0]['notes'][1]['note_id'], 'N002')
