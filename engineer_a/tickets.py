@@ -123,6 +123,53 @@ def validate_records(tickets):
             if ticket["id"] != f"T{number:03d}" or number in seen_ids:
                 raise ValueError("Ticket IDs must be normalized and unique.")
             seen_ids.add(number)
+            notes = ticket["notes"]
+
+            if not isinstance(notes, list):
+                raise ValueError("Notes must be a list.")
+
+            seen_note_ids = set()
+
+            for note in notes:
+                if not isinstance(note, dict):
+                    raise ValueError("Each note must be an object.")
+
+                if set(note) != {"note_id", "author", "message"}:
+                    raise ValueError(
+                        "Each note must contain exactly note_id, author, and message."
+                    )
+
+                note_id = note["note_id"]
+
+                if not isinstance(note_id, str) or not re.fullmatch(
+                    r"N[0-9]{3,}", note_id
+                ):
+                   raise ValueError("Note ID must look like N001.")
+
+                note_number = int(note_id[1:])
+
+                if note_number < 1 or note_id != f"N{note_number:03d}":
+                    raise ValueError(
+                        "Note ID must have a positive, consistently padded number."
+                    )
+
+                if note_number in seen_note_ids:
+                    raise ValueError("Note IDs must be unique within a ticket.")
+
+                seen_note_ids.add(note_number)
+
+                if nonblank(note["author"], "Author") != note["author"]:
+                    raise ValueError("Stored note authors must be trimmed.")
+
+                message = nonblank(note["message"], "Message")
+
+                if message != note["message"]:
+                    raise ValueError("Stored note messages must be trimmed.")
+
+                if len(message) < 5 or len(message) > 300:
+                    raise ValueError(
+                        "Note messages must be between 5 and 300 characters."
+                    )
             if nonblank(ticket["title"], "Title") != ticket["title"]:
                 raise ValueError("Stored titles must be trimmed.")
             for field, choices in (("category", CATEGORIES), ("urgency", URGENCIES),

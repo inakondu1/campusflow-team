@@ -1,4 +1,5 @@
 """Original ticket tests plus AI-assisted validation regression coverage."""
+from engineer_b.workflow import update_status, reopen_ticket
 from copy import deepcopy
 import unittest
 
@@ -67,23 +68,53 @@ class TestTickets(unittest.TestCase):
 
         self.assertEqual(note['note_id'], 'N001')
 
-    def test_resolved_ticket_rejects_note(self):
+    def test_resolved_ticket_rejects_note_until_reopened(self):
         ticket = create_ticket(
             'WiFi problem', 'Network', 'high', 2, self.tickets
         )
-        ticket['status'] = 'resolved'
-        ticket['assigned_to'] = 'John'
+
+        add_note(
+            self.tickets,
+            ticket['id'],
+            'Marvellous',
+            'Checked the router'
+        )
+
+        assign_ticket(self.tickets, ticket['id'], 'John')
+        update_status(self.tickets, ticket['id'], 'in_progress')
+        update_status(self.tickets, ticket['id'], 'resolved')
+
         before = deepcopy(self.tickets)
 
-        with self.assertRaisesRegex(ValueError, "resolved"):
+        with self.assertRaisesRegex(ValueError, "Resolved"):
             add_note(
                 self.tickets,
                 ticket['id'],
                 'Marvellous',
-                'Checked the router'
+                'Checked the router again'
             )
 
         self.assertEqual(self.tickets, before)
+
+        reopen_ticket(self.tickets, ticket['id'])
+
+        second_note = add_note(
+            self.tickets,
+            ticket['id'],
+            'Marvellous',
+            'Checked the router again'
+        )
+
+        self.assertEqual(second_note['note_id'], 'N002')
+        self.assertEqual(len(self.tickets[0]['notes']), 2)
+        self.assertEqual(
+            self.tickets[0]['notes'][0]['message'],
+            'Checked the router'
+        )
+        self.assertEqual(
+            self.tickets[0]['notes'][1]['message'],
+            'Checked the router again'
+        )
 
     def test_zero_rejected_without_consuming_id(self):
         with self.assertRaisesRegex(ValueError, 'positive integer'):
