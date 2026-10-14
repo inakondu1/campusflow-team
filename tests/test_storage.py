@@ -20,6 +20,7 @@ class TestStorage(unittest.TestCase):
             {
                 "id": "T001",
                 "title": "Network issue",
+                "notes": [],
                 "category": "Network",
                 "urgency": "high",
                 "affected_users": 10,

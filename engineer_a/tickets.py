@@ -11,7 +11,7 @@ URGENCIES = ("low", "medium", "high")
 PRIORITIES = ("critical", "high", "medium", "low")
 STATUSES = ("open", "in_progress", "resolved")
 FIELDS = {
-    "id", "title", "category", "urgency", "affected_users",
+    "id", "title", "notes", "category", "urgency", "affected_users",
     "priority", "status", "assigned_to",
 }
 
@@ -64,6 +64,12 @@ def _next_ticket_id(tickets):
     next_number = max((ticket_number(ticket["id"]) for ticket in tickets), default=0) + 1
     return f"T{next_number:03d}"
 
+def _next_note_id(notes):
+    next_number = max(
+        (int(note["note_id"][1:]) for note in notes),
+        default=0
+    ) + 1
+    return f"N{next_number:03d}"
 
 def create_ticket(tickets, title, category, urgency, affected_users):
     """Append only after validation succeeds, returning an independent copy."""
@@ -74,6 +80,7 @@ def create_ticket(tickets, title, category, urgency, affected_users):
     ticket = {
         "id": _next_ticket_id(tickets),
         "title": title,
+        "notes": [],
         "category": category,
         "urgency": urgency,
         "affected_users": affected_users,
@@ -111,7 +118,7 @@ def validate_records(tickets):
     for index, ticket in enumerate(tickets, start=1):
         try:
             if not isinstance(ticket, dict) or set(ticket) != FIELDS:
-                raise ValueError("Each ticket must contain exactly the eight required fields.")
+                raise ValueError("Each ticket must contain exactly the nine required fields.")
             number = ticket_number(ticket["id"])
             if ticket["id"] != f"T{number:03d}" or number in seen_ids:
                 raise ValueError("Ticket IDs must be normalized and unique.")
@@ -134,3 +141,23 @@ def validate_records(tickets):
             raise ValueError(f"Invalid ticket record {index}: {error}") from error
     return tickets
 
+def add_note(tickets, ticket_id, author, message):
+    ticket = _find_record(tickets, ticket_id)
+
+    author = nonblank(author, "Author")
+    message = nonblank(message, "Message")
+
+    if len(message) < 5 or len(message) > 300:
+        raise ValueError("Message must be between 5 and 300 characters.")
+
+    if ticket["status"] == "resolved":
+        raise ValueError("Resolved tickets cannot accept notes. Reopen the ticket first.")
+
+    note = {
+        "note_id": _next_note_id(ticket["notes"]),
+        "author": author,
+        "message": message,
+    }
+
+    ticket["notes"].append(note)
+    return note.copy()

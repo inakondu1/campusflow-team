@@ -4,7 +4,7 @@ from engineer_a.tickets import (
     CATEGORIES, FIELDS, PRIORITIES, STATUSES, URGENCIES, _find_record,
     calculate_priority, create_ticket as _create_ticket, find_ticket,
     list_tickets, nonblank, normalize_choice, ticket_number,
-    validate_affected_users, validate_records,
+    validate_affected_users, validate_records, add_note,
 )
 from engineer_b.workflow import assign_ticket
 
