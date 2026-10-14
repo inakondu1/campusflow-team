@@ -184,3 +184,26 @@ class StorageTests(unittest.TestCase):
         add_note(loaded, 'T001', 'Marvellous', 'Second note')
 
         self.assertEqual(loaded[0]['notes'][1]['note_id'], 'N002')
+
+    def test_invalid_notes_are_rejected_without_overwriting(self):
+        broken = deepcopy(self.tickets)
+        broken[0]["notes"] = [
+            {
+                "note_id": "N001",
+                "author": "Ina",
+                "message": "Good note"
+            },
+            {
+                "note_id": "N001",
+                "author": "Marvellous",
+                "message": "Duplicate ID"
+            }
+        ]
+
+        self.write_raw(json.dumps(broken))
+        before = self.path.read_bytes()
+
+        with self.assertRaises(StorageError):
+            load_tickets(self.path)
+
+        self.assertEqual(self.path.read_bytes(), before)
