@@ -1,50 +1,33 @@
-# CampusFlow — Engineer B: Workflow Lifecycle & Automation
+# CampusFlow - Engineer B
 
-This module forms the core workflow engine for **CampusFlow**, an automated helpdesk and ticketing system designed to streamline campus support requests. 
+## Overview
+CampusFlow is a campus helpdesk and ticketing system.
 
-As **Engineer B**, this component focuses on managing ticket status transitions, handling resolution lifecycle logic, enforcing state rules, and executing automated task triggers.
+## Project Structure
+- campusflow/workflow.py: Ticket assignment, status transitions, and open work queue.
+- campusflow/search.py: Title search and ticket filters.
+- campusflow/reports.py: Ticket statistics and resolution reports.
+- campusflow/quiz.py: Six-question Engineering Understanding Check.
+- tests/: Automated tests.
+- docs/: Development notes.
 
----
+## Features
+- Ticket assignment and status validation.
+- Open-only work queue sorted by priority and numeric ticket ID.
+- Case-insensitive title search.
+- Combined category, status, and priority filters using AND logic.
+- Reports for ticket totals, status, priority, category, and resolution percentage.
+- Six-question quiz with answer validation and a final score.
 
-## 🛠 Tech Stack & Tools
+## Run Tests
+Run this command from the project root:
 
-- **Language:** Python 3.10+
-- **Testing:** `unittest` / `pytest`
-- **Environment:** Visual Studio Code / Linux CLI
-- **Version Control:** Git & GitHub (`campusflow-team`)
+```bash
+python3 -m unittest discover -s tests -v
+```
 
----
+## Development Notes
+CLI integration and ticket-note functionality still require verification.
 
-## 🚀 Key Features & Responsibilities
-
-### 1. Ticket State Machine & Status Transitions
-- Enforces valid status transitions across the ticket lifecycle:
-  - `OPEN` ➔ `IN_PROGRESS`
-  - `IN_PROGRESS` ➔ `RESOLVED` / `ON_HOLD`
-  - `RESOLVED` ➔ `CLOSED`
-- Prevents invalid or illegal status jumps (e.g., direct transition from `OPEN` to `CLOSED` without resolution notes).
-
-### 2. Workflow Validation & Exception Handling
-- Handles edge cases such as missing ticket parameters, unauthorized status changes, and missing resolution details.
-- Raises structured exceptions to maintain data integrity across the system.
-
-### 3. Automated Lifecycle Actions
-- Auto-assigns timestamps when tickets transition to `RESOLVED` or `CLOSED`.
-- Triggers notification hooks when high-priority or urgent support tickets are submitted or escalated.
-
----
-
-## 📁 Repository & Branch Structure
-
-```text
-campusflow-team/
-├── src/
-│   ├── workflow.py       # Core workflow state & transition logic
-│   └── utils.py          # Helper functions & validation rules
-├── tests/
-│   └── test_workflow.py  # Unit tests for workflow lifecycle
-└── README.md             # Engineer B documentation
-
-''' I ise this to run the unit testing '''
-
-''' python3 -m unittest discover -s tests'''
+## Branch
+Current development branch: feat/engineer-b-workflow

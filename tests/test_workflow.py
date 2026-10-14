@@ -46,5 +46,18 @@ class TestWorkflowAndReports(unittest.TestCase):
         self.assertEqual(report["status_breakdown"]["resolved"], 1)
         self.assertEqual(report["status_breakdown"]["open"], 2)
 
+
+    def test_get_work_queue_excludes_in_progress_tickets(self):
+        tickets = [
+            {"id": "T001", "status": "open", "priority": "high"},
+            {"id": "T002", "status": "in_progress", "priority": "critical"},
+            {"id": "T003", "status": "open", "priority": "low"},
+        ]
+
+        queue = get_work_queue(tickets)
+
+        self.assertEqual([ticket["id"] for ticket in queue], ["T001", "T003"])
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -32,7 +32,7 @@ def get_work_queue(tickets):
     """Returns unresolved tickets sorted by priority and numeric ID."""
     priority_weight = {"critical": 4, "high": 3, "medium": 2, "low": 1}
     
-    unresolved = [t for t in tickets if t["status"] != "resolved"]
+    unresolved = [t for t in tickets if t["status"] == "open"]
     
     def sort_key(t):
         p_val = priority_weight.get(t.get("priority", "low"), 1)
