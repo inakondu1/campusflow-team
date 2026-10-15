@@ -14,3 +14,9 @@ def update_status(ticket, new_status):
 def reopen_ticket(ticket):
     """Reopen the supplied stored record through the shared lifecycle rules."""
     return _reopen_ticket([ticket], ticket["id"])
+
+
+def get_work_queue(tickets):
+    """Return the shared open work queue."""
+    from engineer_b.workflow import work_queue
+    return work_queue(tickets)
